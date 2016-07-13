@@ -1,5 +1,6 @@
 <?php
 Route::get('/', 'WelcomeController@index');
+Route::get('/beta', 'WelcomeController@beta');
 Route::get('/rentabilidade', 'RentabilidadeController@index');
 
 Route::get('sobre', function () {

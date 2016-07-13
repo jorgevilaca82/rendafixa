@@ -5,7 +5,7 @@
         {!! Form::open() !!}
             <input type="hidden" name="poupanca" id="poupanca" value="{{ $poupanca }}" />
             <div class="form-group">
-                <label for="amount">{{ trans('simulador.valor.da.aplicacao') }}</label>
+                <label for="amount">{{ trans('simulador.valor.da.aplicacao') }} {{4+6}}</label>
                 <div class="input-group">
                     <div class="input-group-addon">R$</div>
                     <input type="number" class="form-control" id="amount" placeholder="{{ trans('simulador.valor.da.aplicacao') }}" value="{{$amount}}"
@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
                 <label for="lci">{{ trans('simulador.lci.lca') }}</label>
-                <div class="input-group">
+ph                <div class="input-group">
                     <input type="number" class="form-control" id="lci" placeholder="{{ trans('rendimento.lci.lca') }}" value="{{ $taxlci }}"
                            min="0" max="100"/>
                     <div class="input-group-addon">% {{ trans('simulador.di') }}</div>
