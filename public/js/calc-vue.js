@@ -2,15 +2,26 @@ function jurosCompostos(valor, taxa, periodo) {
     return valor * (Math.pow(taxa, periodo)) - valor;
 }
 
+Vue.component('progressbar', {});
+
 var appCalc = new Vue({
     el: '#appCalc',
     data: {
         dados: dados,
-        taxas: taxas
+        taxas: taxas,
+        barraPoupanca: { width: '0%', percent: 0 },
+        barraCdb: { width: '0%', percent: 0 },
+        barraLci: { width: '0%', percent: 0 },
+        barraTdselic: { width: '0%', percent: 0 },
     },
     methods: {
         idxBasico: function (tx1, tx2) {
             return Math.pow((((tx1/100) * tx2) / 100 + 1), (1/12));
+        },
+        calcBarra: function(barra, val) {
+            var percent = (val / this.dados.investimento * 100).toFixed(1);
+            barra.width = (percent * 300 / this.dados.periodo);
+            barra.percent = percent;
         }
     },
     computed: {
@@ -29,21 +40,29 @@ var appCalc = new Vue({
             }
         },
         poupancaResult: function () {
-            return jurosCompostos(this.dados.investimento, (this.taxas.poupanca / 100 + 1), this.dados.periodo);
+            var v = jurosCompostos(this.dados.investimento, (this.taxas.poupanca / 100 + 1), this.dados.periodo);
+            this.calcBarra(this.barraPoupanca, v);
+            return v;
         },
         lciResult: function () {
             var lciIdx = this.idxBasico(this.taxas.taxlci, this.taxas.cdi);
+            var v = jurosCompostos(this.dados.investimento, lciIdx, this.dados.periodo);
+            this.calcBarra(this.barraLci, v);
             return {
-                result: jurosCompostos(this.dados.investimento, lciIdx, this.dados.periodo)
+                result: v
             };
         },
         cdbResult: function () {
             var cdbIdx = this.idxBasico(this.taxas.taxcdb, this.taxas.cdi);
             var result = jurosCompostos(this.dados.investimento, cdbIdx, this.dados.periodo);
+            var irVal = result * (this.indexIR / 100);
+            var liquido = result - irVal;
+            this.calcBarra(this.barraCdb, liquido);
             return {
                 result: result,
                 irIdx: this.indexIR,
-                irVal: result * (this.indexIR / 100)
+                irVal: irVal,
+                liquido: liquido
             };
         },
         tesouroSelicResult: function () {
@@ -51,12 +70,14 @@ var appCalc = new Vue({
             var result = jurosCompostos(this.dados.investimento, selicTDIdx, this.dados.periodo);
             var irVal = result * (this.indexIR / 100);
             var txBVMF = this.dados.investimento * this.indexBVMF;
+            var liquido = (result - irVal - txBVMF);
+            this.calcBarra(this.barraTdselic, liquido);
             return {
                 result: result,
                 irIdx: this.indexIR,
                 irVal: irVal,
                 txBVMF: this.dados.investimento * this.indexBVMF,
-                liquido: (result - irVal - txBVMF)
+                liquido: liquido
             };
         },
     }

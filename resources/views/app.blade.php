@@ -20,7 +20,6 @@
       ga('create', 'UA-60343512-1', 'auto');
       ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 <body role="document">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -56,7 +55,6 @@
             @yield('content')
         </div>
     </div>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     @yield('footer')
 </body>
 </html>

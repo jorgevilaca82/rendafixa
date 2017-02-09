@@ -23,7 +23,9 @@ class WelcomeController extends Controller
 		$taxcdb = Cookie::get(PreferencesVO::PREFERENCES_TAXCDB, PreferencesVO::DEFAULT_TAXCDB);
 		$taxlci = Cookie::get(PreferencesVO::DEFAULT_TAXLCI, PreferencesVO::DEFAULT_TAXLCI);
 
-		return view('welcome', compact('cdi', 'poupanca', 'selic', 'amount', 'period', 'taxcdb', 'taxlci'));
+		$viewData = compact('cdi', 'poupanca', 'selic', 'amount', 'period', 'taxcdb', 'taxlci');
+		// dd($viewData);
+		return view('welcome', $viewData);
 	}
 
 

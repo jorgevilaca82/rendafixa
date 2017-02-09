@@ -82,8 +82,8 @@
                     Valor Líquido: R$ <span class="liquido">@{{poupancaResult.toFixed(2)}}</span><br />
                     <div class="progress">
                         <div id="bar-poupanca" class="progress-bar progress-bar-danger" role="progressbar"
-                             style="width: 0%; min-width: 2em;">
-                            0%
+                             style="width: 0%; min-width: 2em;" :style="{ width: barraPoupanca.width + 'px' }">
+                            @{{ barraPoupanca.percent }} %
                         </div>
                     </div>
                 </div>
@@ -91,11 +91,11 @@
                     <h4>CDB</h4>
                     Valor Total: R$ <span class="total">@{{ cdbResult.result.toFixed(2) }}</span><br />
                     Imposto de Renda: R$ <span class="ir">@{{ cdbResult.irVal.toFixed(2) }}</span> <span class="badge">@{{ cdbResult.irIdx }}%</span><br />
-                    Valor Líquido: R$ <span class="liquido">0</span><br />
+                    Valor Líquido: R$ <span class="liquido">@{{ cdbResult.liquido.toFixed(2) }}</span><br />
                     <div class="progress">
                         <div id="bar-cdb" class="progress-bar progress-bar-info" role="progressbar"
-                             style="width: 0%; min-width: 2em;">
-                            0%
+                             style="width: 0%; min-width: 2em;" :style="{ width: barraCdb.width + 'px' }">
+                            @{{ barraCdb.percent }} %
                         </div>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
                     Valor Líquido: R$ <span class="liquido">@{{ lciResult.result.toFixed(2) }}</span><br />
                     <div class="progress">
                         <div id="bar-lci" class="progress-bar progress-bar-success" role="progressbar"
-                             style="width: 0%; min-width: 2em;">
-                            0%
+                             style="width: 0%; min-width: 2em;" :style="{ width: barraLci.width + 'px' }">
+                            @{{ barraLci.percent }} %
                         </div>
                     </div>
                 </div>
@@ -117,8 +117,8 @@
                     Valor Líquido: R$ <span class="liquido">@{{ tesouroSelicResult.liquido.toFixed(2) }}</span><br />
                     <div class="progress">
                         <div id="bar-tdselic" class="progress-bar progress-bar-success" role="progressbar"
-                             style="width: 0%; min-width: 2em;">
-                            0%
+                             style="width: 0%; min-width: 2em;" :style="{ width: barraTdselic.width + 'px' }">
+                            @{{ barraTdselic.percent }} %
                         </div>
                     </div>
                 </div>
